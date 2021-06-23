@@ -27,7 +27,7 @@ namespace MovieAPI.Models
     [Required]
     public double Rating { get; set; }
 
-    //foreign key
+    //foreign key (this isn't needed, no lazy loading reqd)
     [Required]
     public virtual ICollection<Actor> Actors { get; set; }
 

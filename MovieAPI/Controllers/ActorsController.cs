@@ -22,9 +22,10 @@ namespace MovieAPI.Controllers
   //GET api/movies/1/actors
 
   [HttpGet]
-  public async Task<ActionResult<IEnumerable<Actor>>> Get()
+  public async Task<ActionResult<IEnumerable<Actor>>> Get(int movieId)
   {
-    return await _db.Actors.ToListAsync();
+    List<Actor> movieActorList = _db.Actors.Where(e => e.MovieId == movieId)
+    return movieActorList;
   }
   // [HttpGet]
   // public async Task<ActionResult<IEnumerable<Actor>>> Get(string name, int age, bool oscarWinner, int movieId)
@@ -78,7 +79,7 @@ namespace MovieAPI.Controllers
 
       return actor;
     }
-    //PUT: api/Actors/1
+    //PUT: api/movies/1/Actors/1
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, Actor actor)
     {
@@ -104,7 +105,7 @@ namespace MovieAPI.Controllers
       }
       return NoContent();
     }
-    //DELETE: api/Actors/1
+    //DELETE: api/movies/1/Actors/1
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteActor(int id)
     {
