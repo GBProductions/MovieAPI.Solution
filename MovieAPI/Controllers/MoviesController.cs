@@ -51,15 +51,15 @@ namespace MovieAPI.Controllers
         query = query.Where(entry => entry.Year == year);
       }
 
-      if (leadChar != null)
-      {
-        query = query.Where(entry => entry.LeadChar == leadChar);
-      }
+      // if (leadChar != null)
+      // {
+      //   query = query.Where(entry => entry.LeadChar == leadChar);
+      // }
 
-      if (supportChar != null)
-      {
-        query = query.Where(entry => entry.SupportChar == supportChar);
-      }
+      // if (supportChar != null)
+      // {
+      //   query = query.Where(entry => entry.SupportChar == supportChar);
+      // }
 
       if (rating != 0)
       {
@@ -154,8 +154,47 @@ namespace MovieAPI.Controllers
       var randomMovie = await _db.Movies.FindAsync(randomId);
 
       return randomMovie;
-
     }
+
+    //   //GET: top ten movies
+    // [HttpGet("topten")]
+    // public async Task<ActionResult<IQueryable<Movie>>> GetTopTen()
+    // {
+    //   var descendingRatingList = _db.Movies.OrderByDescending(x => x.Rating).ToList();
+    //   var topTen = descendingRatingList.Take(3);
+    //   var topTenList = await topTen.ToListAsync();
+    //   return topTenList;
+    // }
+
+    // // //GET: top ten movies
+    // [HttpGet("topten")]
+    // public async Task<ActionResult<IEnumerable<Movie>>> GetTopTen(int id)
+    // {
+    //   List<Movie> descendingRatingList = _db.Movies.OrderByDescending(x => x.Rating).ToList();
+    //   var topTen = descendingRatingList.Take(3);
+    //   var topTenList = await _db.Movies.FindAsync(topTen);
+    //   // var testList = await _db.Movies.FindAsync(descendingRatingList);
+    //   return await descendingRatingList;
+    // }
+
+
+    // //GET: top ten movies
+    // [HttpGet("topten")]
+    // public async Task<ActionResult<IEnumerable<Movie>>> GetTopTen()
+    // {
+    //   //var testMovieList = await _db.Movies.ToListAsync();
+    //   List<double> ratingList = new List<double>();
+    //   foreach (Movie movie in testMovieList)
+    //   {
+    //     ratingList.Add(movie.Rating);
+    //   }
+    //   return ratingList.ToListAsync();
+    //   // for(int i = 0; i < testMovieList.Length; i++)
+    //   // {
+        
+    //   // }
+    //   //return testMovieList;
+    // }
   }
 }
 // 
@@ -170,3 +209,5 @@ namespace MovieAPI.Controllers
 // randomMovie = db.Movies.OrderBy(r => Guid.NewGuid()).Skip(toSkip).Take(1).First();
 
 // return (from movies where )
+
+

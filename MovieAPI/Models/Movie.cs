@@ -1,9 +1,15 @@
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace MovieAPI.Models
 {
   public class Movie
   {
+    public Movie()
+    {
+      this.Actors = new HashSet<Actor>();
+    }
+    
     public int MovieId { get; set; }
 
     [Required]
@@ -19,12 +25,12 @@ namespace MovieAPI.Models
     public int Year { get; set; }
 
     [Required]
-    public string LeadChar { get; set; }
-
-    [Required]
-    public string SupportChar { get; set; }
-
-    [Required]
     public double Rating { get; set; }
+
+    //foreign key
+    [Required]
+    public virtual ICollection<Actor> Actors { get; set; }
+
+
   }
 }
