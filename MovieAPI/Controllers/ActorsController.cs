@@ -78,8 +78,50 @@ namespace MovieAPI.Controllers
 
       return actor;
     }
+    //PUT: api/Actors/1
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, Actor actor)
+    {
+      if (id != actor.ActorId)
+      {
+        return BadRequest();
+      }
+      _db.Entry(actor).State = EntityState.Modified;
+      try
+      {
+        await _db.SaveChangesAsync();
+      }
+      catch (DbUpdateConcurrencyException)
+      {
+        if (!ActorExists(id))
+        {
+          return NotFound();
+        }
+        else 
+        {
+          throw;
+        }
+      }
+      return NoContent();
+    }
+    //DELETE: api/Actors/1
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteActor(int id)
+    {
+      var actor = await _db.Actors.FindAsync(id);
+      if (actor == null)
+      {
+        return NotFound();
+      }
+      _db.Actors.Remove(actor);
+      await _db.SaveChangesAsync();
 
+      return NoContent();
+    }
 
-
+    private bool ActorExists(int id)
+    {
+      return _db.Actors.Any(e => e.ActorId == id);
+    }
   }
 }
