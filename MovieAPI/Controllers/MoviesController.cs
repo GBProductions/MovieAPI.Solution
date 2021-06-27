@@ -23,40 +23,40 @@ namespace MovieAPI.Controllers
     //Get: api/Movies
     [HttpGet]
 
-    public async Task<ActionResult<IEnumerable<Movie>>> Get()
-    {
-      return await _db.Movies.ToListAsync();
-    }  
+    public async Task<ActionResult<IEnumerable<Movie>>> Get(string name, string genre, string director, int year, int rating)
     // {
-    //   var query = _db.Movies.AsQueryable();
+    //   return await _db.Movies.ToListAsync();
+    // }  
+    {
+      var query = _db.Movies.AsQueryable();
 
-    //   if (name != null)
-    //   {
-    //     query = query.Where(entry => entry.Name == name);
-    //   }
+      if (name != null)
+      {
+        query = query.Where(entry => entry.Name == name);
+      }
 
-    //   if (genre != null)
-    //   {
-    //     query = query.Where(entry => entry.Genre == genre);
-    //   }
+      if (genre != null)
+      {
+        query = query.Where(entry => entry.Genre == genre);
+      }
 
-    //   if (director != null)
-    //   {
-    //     query = query.Where(entry => entry.Director == director);
-    //   }
+      if (director != null)
+      {
+        query = query.Where(entry => entry.Director == director);
+      }
 
-    //   if (year != 0)
-    //   {
-    //     query = query.Where(entry => entry.Year == year);
-    //   }
+      if (year != 0)
+      {
+        query = query.Where(entry => entry.Year == year);
+      }
 
-    //   if (rating != 0)
-    //   {
-    //     query = query.Where(entry => entry.Rating == rating);
-    //   }
+      if (rating != 0)
+      {
+        query = query.Where(entry => entry.Rating == rating);
+      }
 
-    //   return await query.ToListAsync();
-    // }
+      return await query.ToListAsync();
+    }
 
     //POST api/movies
     [HttpPost]
