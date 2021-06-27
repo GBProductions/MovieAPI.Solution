@@ -24,34 +24,43 @@ namespace MovieAPI.Controllers
   [HttpGet]
   public async Task<ActionResult<IEnumerable<Actor>>> Get(int movieId)
   {
-    List<Actor> movieActorList = _db.Actors.Where(e => e.MovieId == movieId)
-    return movieActorList;
+
+    var query = _db.Actors.AsQueryable();
+
+    if (movieId != 0)
+    {
+      query = query.Where(entry => entry.MovieId == movieId);
+    }
+
+    return await query.ToListAsync();
+    // List<Actor> movieActorList = _db.Actors.Where(e => e.MovieId == movieId);
+    // return await movieActorList.ToListAsync();
   }
   // [HttpGet]
   // public async Task<ActionResult<IEnumerable<Actor>>> Get(string name, int age, bool oscarWinner, int movieId)
   // {
-    // var query = _db.Actors.AsQueryable();
+  //   var query = _db.Actors.AsQueryable();
 
-    //   if (name != null)
-    //   {
-    //     query = query.Where(entry => entry.Name == name);
-    //   }
+  //     if (name != null)
+  //     {
+  //       query = query.Where(entry => entry.Name == name);
+  //     }
 
-    //   if (age != null)
-    //   {
-    //     query = query.Where(entry => entry.Age == age);
-    //   }
+  //     if (age != 0)
+  //     {
+  //       query = query.Where(entry => entry.Age == age);
+  //     }
 
-    //   if (oscarWinner != null)
-    //   {
-    //     query = query.Where(entry => entry.OscarWinner == oscarWinner);
-    //   }
+  //     if (oscarWinner != true || false)
+  //     {
+  //       query = query.Where(entry => entry.OscarWinner == oscarWinner);
+  //     }
 
-    //   if (movieId != 0)
-    //   {
-    //     query = query.Where(entry => entry.MovieId == movieId);
-    //   }
-      // return await query.ToListAsync();
+  //     if (movieId != 0)
+  //     {
+  //       query = query.Where(entry => entry.MovieId == movieId);
+  //     }
+  //     return await query.ToListAsync();
   // }
 
     //POST api/movies/1/actors
